@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-dal-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-dal-app
+  template:
+    metadata:
+      labels:
+        app: mongo-dal-app
+    spec:
+      containers:
+        - name: mongo-dal-app
+          image: david4554545/mongo-dal-app:latest
+          ports:
+            - containerPort: 8510
+          env:
+            - name: MONGO_HOST
+              value: mongodb
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_USER
+              value: root
+            - name: MONGO_PASSWORD
+              value: pass
+            - name: MONGODB_DB_NAME
+              value: mongoDB_DAL_DB
+            - name: MONGODB_COLLECTION_NAME
+              value: project_collection
